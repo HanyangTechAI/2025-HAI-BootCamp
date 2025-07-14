@@ -1,17 +1,22 @@
-[project]
-name = "mot"
+[tool.poetry]
+name = "extract_cough"
 version = "0.1.0"
+package-mode = false
 description = ""
-authors = [
-    {name = "roger",email = "minseungkim1017@gmail.com"}
-]
+authors = ["rogerkimjazzlover <minseungkim1017@gmail.com>"]
 readme = "README.md"
-requires-python = ">=3.12"
-dependencies = [
-    "ultralytics (>=8.3.142,<9.0.0)"
-]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+transformers = "^4.47.1"
+torchvision = "^0.20.1"
+llvmlite = "^0.43.0"
+matplotlib = "^3.10.0"
+numpy = "2.0.0"
+torch = "^2.5.1"
+pandas = "^2.2.3"
 
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
