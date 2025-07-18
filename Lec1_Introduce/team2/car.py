@@ -12,3 +12,9 @@ class Car:
     
     def stop():
         print("The car is stopped")
+
+    def turnRight():
+        print("The car is turning right")
+
+    def turnLeft():
+        print("The car is turning left")
