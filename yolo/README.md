@@ -8,10 +8,10 @@ The model is known for its speed and accuracy, making it a popular choice for re
 
 Here is a visualization of the YOLO model architecture.
 
-![YOLO Model](./yolo_model.png)
+![YOLO Model](./assets/yolo_model.png)
 
 ## Model Loss
 
 The following graph shows the training loss over epochs, which helps in evaluating the model's performance.
 
-![Model Loss](./loss.png)
+![Model Loss](./assets/loss.png)
