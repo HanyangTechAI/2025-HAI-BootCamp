@@ -1,8 +1,8 @@
 import torch.nn as nn
 
 S = 7 
-B = 5 # bounding box
-C = 20 # class
+B = 2
+C = 20
 
 class YOLO(nn.Module):
     def __init__(self, init_weight=True):
@@ -60,7 +60,6 @@ class YOLO(nn.Module):
             nn.LeakyReLU(0.1),
             nn.MaxPool2d(kernel_size=2, stride=2, padding=0),
             
-            
             nn.Conv2d(in_channels=1024, out_channels=512, kernel_size=1, stride=1, padding=0),
             nn.LeakyReLU(0.1),
             nn.Conv2d(in_channels=512, out_channels=1024, kernel_size=3, stride=1, padding=1),
@@ -77,6 +76,6 @@ class YOLO(nn.Module):
             nn.Conv2d(in_channels=1024, out_channels=1024, kernel_size=3, stride=1, padding=1),
             nn.LeakyReLU(0.1),
             nn.Conv2d(in_channels=1024, out_channels=1024, kernel_size=3, stride=1, padding=1),
-            nn.LeakyReLU(0.1),
+            nn.LeakyReLU(0.1)
         )
         return darknet
