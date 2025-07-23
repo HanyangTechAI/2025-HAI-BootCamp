@@ -124,11 +124,10 @@ class YOLO(nn.Module):
         nn.Flatten(),
         nn.Linear(1024 * 7 * 7, 4096),
         nn.LeakyReLU(0.1),
-        nn.Dropout(0.5),
         nn.Linear(4096, S * S * (B * 5 + C)) 
         )
         return fc
-        
+
     def _initialize_weights(self):
         for m in self.modules():
             if isinstance(m, nn.Conv2d) or isinstance(m, nn.Linear):
