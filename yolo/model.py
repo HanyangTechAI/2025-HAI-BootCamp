@@ -2,7 +2,7 @@ import torch.nn as nn
 
 # hyper parameter
 S = 7 # 결과물의 width, height
-B = 5 # 5개의 값 : 중심 좌표 x, y | width, height | 물체가 있을 확률
+B = 2 # bounding box 개수
 C = 20 # 클래스 20개 -> 구분할 수 있는 object가 20개
 
 class YOLO(nn.Module):
@@ -11,7 +11,7 @@ class YOLO(nn.Module):
         if init_weight:
             self._initialize_weights()
 
-        self.darknet = self._make_conv_layers() # darknet : YOLO의 fully connected layer 전 모든 conv layer
+        self.darknet = self._make_conv_layers() # darknet : YOLO의 fully connected layer 전 모든 conv layers
         self.fully_connected_layer = self._make_fc_layers()
 
     def forward(self, x):
