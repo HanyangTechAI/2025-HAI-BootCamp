@@ -1,3 +1,4 @@
+import torch
 import torch.nn as nn
 
 S = 7
@@ -13,7 +14,7 @@ class YOLO(nn.Module):
         self.darknet = self._make_conv_layers()
         self.fully_connected_layer = self._make_fc_layers()
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         x = self.darknet(x)
         x = self.fully_connected_layer(x)
         return x
@@ -73,7 +74,9 @@ class YOLO(nn.Module):
 
     def _make_fc_layers():
         fc = nn.Sequential(
-
+            nn.Linear(S*S*1024, 4096),
+            nn.LeakyReLU(0.1),
+            nn.Linear(4096, S*S*(B*5+C))
         )
         return fc    
 
