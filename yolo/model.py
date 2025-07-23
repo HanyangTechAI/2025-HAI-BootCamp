@@ -74,6 +74,7 @@ class YOLO(nn.Module):
 
     def _make_fc_layers():
         fc = nn.Sequential(
+            nn.Flatten(),
             nn.Linear(S*S*1024, 4096),
             nn.LeakyReLU(0.1),
             nn.Linear(4096, S*S*(B*5+C))
