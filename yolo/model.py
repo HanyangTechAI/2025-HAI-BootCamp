@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 S = 7
-B = 5
+B = 2
 C = 20
 
 class YOLO(nn.Module):
