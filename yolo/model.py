@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 S = 7
-B = 5
+B = 2
 C = 20
 
 class YOLO(nn.Module):
@@ -68,6 +68,8 @@ class YOLO(nn.Module):
             nn.Conv2d(1024, 512, kernel_size=1, padding=0),
             nn.LeakyReLU(0.1, inplace=True),
             nn.Conv2d(512, 1024, kernel_size=3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(1024, 1024, kernel_size=3, padding=1, stride=2),
             nn.LeakyReLU(0.1, inplace=True),
             
             nn.Conv2d(1024, 1024, kernel_size=3, padding=1),
