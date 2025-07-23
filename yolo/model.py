@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 S = 7
-B = 5
+B = 2
 C = 20
 
 class YOLO(nn.Module):
@@ -14,11 +14,6 @@ class YOLO(nn.Module):
 
         self.darknet = self._make_conv_layers()
         self.fully_connected_layer = self._make_fc_layers()
-
-    def forward(self, x):
-        x = self.darknet(x)
-        x = self.fully_connected_layer(x)
-        return x
 
     def _make_conv_layers(self):
         darknet = nn.Sequential(
@@ -86,3 +81,10 @@ class YOLO(nn.Module):
 
         )
         return darknet
+
+    def forward(self, x):
+        x = self.darknet(x)
+        x = self.fully_connected_layer(x)
+        return x
+
+    
