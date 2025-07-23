@@ -20,7 +20,54 @@ class YOLO(nn.Module):
 
     def _make_conv_layers():
         darknet = nn.Sequential(
+            nn.Conv2d(3, 64, 7, stride=2, padding=3),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.MaxPool2d(2),
 
+            nn.Conv2d(64, 192, 3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.MaxPool2d(2),
+
+            nn.Conv2d(192, 128, 1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(128, 256, 3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(256, 256, 1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(256, 512, 3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.MaxPool2d(2),
+
+            nn.Conv2d(512, 256, 1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(256, 512, 3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(512, 256, 1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(256, 512, 3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(512, 256, 1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(256, 512, 3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(512, 256, 1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(256, 512, 3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(512, 512, 1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(512, 1024, 3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.MaxPool2d(2),
+
+            nn.Conv2d(1024, 512, 1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(512, 1024, 3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(1024, 512, 1),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(512, 1024, 3, padding=1),
+            nn.LeakyReLU(0.1, inplace=True)
         )
         return darknet
 
