@@ -1,8 +1,8 @@
 import torch.nn as nn
 
-S = 7
-B = 5
-C = 20
+S = 7 #결과물 width, height
+B = 2 #grid cell 당 생성하는 bounding box 개수
+C = 20 #object class 개수 = 구분할 수 있는 물체의 종류 수
 
 class YOLO(nn.Module):
     def __init__(self, init_weight=True):
