@@ -3,6 +3,7 @@ import torch.optim as optim
 import torchvision.transforms as transforms
 import torchvision.transforms.functional as FT
 from torch.utils.data import DataLoader
+import matplotlib.pyplot as plt
 
 from tqdm import tqdm
 
@@ -27,7 +28,7 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 print("DEVICE: ", DEVICE)
 BATCH_SIZE = 8 # 64 in original paper
 WEIGHT_DECAY = 0
-EPOCHS = 1
+EPOCHS = 10
 
 import os
 NUM_WORKERS = os.cpu_count() // 2
@@ -39,8 +40,8 @@ PIN_MEMORY = True
 
 IMG_DIR = "data/images"
 LABEL_DIR = "data/labels"
-TRAIN_CSV = "data/8examples.csv"
-VALIDATE_CSV = "data/val_8examples.csv"
+TRAIN_CSV = "data/80examples.csv"
+VALIDATE_CSV = "data/val_80examples.csv"
 
 class Compose(object):
     def __init__(self, transforms):
@@ -85,11 +86,12 @@ def validate(loader, model, loss_fn):
             y = y.to(DEVICE)
             out = model(x)
             loss = loss_fn(out, y)
-            losses.append(loss)
+            losses.append(loss.item())
             loop.set_postfix(loss=loss.item())
 
     mean_loss = sum(losses) / len(losses)
     print(f"Mean Validation Loss {mean_loss}")
+    model.train()
     return mean_loss 
 
 def main():
@@ -131,13 +133,24 @@ def main():
         drop_last=True,
     )
 
-    for epochs in range(EPOCHS):
+    train_losses = []
+    val_losses = []
+
+    for epoch in range(EPOCHS):
+        print(f"Epoch {epoch+1}/{EPOCHS}")
         train_loss = train_fn(train_loader, model, optimizer, loss_fn)
         val_loss = validate(validation_loader, model, loss_fn)
-        print("========== Train Loss ==========")
-        print(train_loss)
-        print("========== Validation Loss ==========")
-        print(val_loss)
+        train_losses.append(train_loss)
+        val_losses.append(val_loss)
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(train_losses, label='Train Loss')
+    plt.plot(val_losses, label='Validation Loss')
+    plt.title('Training and Validation Loss')
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.legend()
+    plt.show()
 
 if __name__ == "__main__":
     main()

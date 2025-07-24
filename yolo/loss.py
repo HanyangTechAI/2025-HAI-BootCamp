@@ -81,8 +81,8 @@ class Loss(nn.Module):
         # Note that bestbox will be indices of 0, 1 for which bbox was best
         bestbox = (iou_b1 > iou_b2).int() # 1 if box1 is better, 0 if box2 is better
         bestbox = bestbox.view(-1)[0].item() 
-        print("=========== Best Box ==========")
-        print(bestbox)
+        # print("=========== Best Box ==========")
+        # print(bestbox)
         # I_obj_i
         exists_box = target[..., 20].unsqueeze(3)
 
