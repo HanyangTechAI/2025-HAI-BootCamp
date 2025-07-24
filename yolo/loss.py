@@ -79,8 +79,8 @@ class Loss(nn.Module):
 
         # Take the box with highest IoU out of the two prediction
         # Note that bestbox will be indices of 0, 1 for which bbox was best
-        ious = torch.cat([iou_b1.unsqueeze(0), iou_b2.unsqueeze(0)], dim=0)
-        iou_maxes, bestbox = torch.max(ious, dim=0)
+        bestbox = (iou_b1 > iou_b2).int() # 1 if box1 is better, 0 if box2 is better
+        bestbox = bestbox.view(-1)[0].item() 
         print("=========== Best Box ==========")
         print(bestbox)
         # I_obj_i
