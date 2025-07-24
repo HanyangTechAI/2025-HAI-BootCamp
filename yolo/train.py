@@ -20,20 +20,17 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 print("DEVICE: ", DEVICE)
 BATCH_SIZE = 8 # 64 in original paper
 WEIGHT_DECAY = 0
-EPOCHS = 10
+EPOCHS = 100
 
 import os
 NUM_WORKERS = os.cpu_count() // 2
 print("NUM_WORKERS: ", NUM_WORKERS)
 PIN_MEMORY = True
 
-# LOAD_MODEL = False
-# LOAD_MODEL_FILE = "overfit.pth.tar"
-
 IMG_DIR = "data/images"
 LABEL_DIR = "data/labels"
-TRAIN_CSV = "data/80examples.csv"
-VALIDATE_CSV = "data/val_80examples.csv"
+TRAIN_CSV = "data/train_5000.csv"
+VALIDATE_CSV = "data/val_1500.csv"
 
 class Compose(object):
     def __init__(self, transforms):
