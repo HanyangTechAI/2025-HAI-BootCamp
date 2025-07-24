@@ -23,5 +23,5 @@ def generate_csv(image_dir, label_dir, output_file, num_examples):
             f.write(f"{name}.jpg,{name}.txt\n")
 
 if __name__ == "__main__":
-    generate_csv("images", "labels", "400examples.csv", 80)
+    generate_csv("images", "labels", "val_27.csv", 27)
 
