@@ -10,15 +10,7 @@ from tqdm import tqdm
 from loss import Loss
 from model import YOLO
 from dataset import VOCDataset
-from utils import (
-    non_max_suppression,
-    mean_average_precision,
-    cellboxes_to_boxes,
-    get_bboxes,
-    plot_image,
-    save_checkpoint,
-    load_checkpoint,
-)
+
 seed = 123
 torch.manual_seed(seed)
 
@@ -136,12 +128,28 @@ def main():
     train_losses = []
     val_losses = []
 
+    best_val_loss = float('inf')
+    best_model_path = None
+
     for epoch in range(EPOCHS):
-        print(f"Epoch {epoch+1}/{EPOCHS}")
+        print(f"========== Epoch {epoch + 1}/{EPOCHS} ==========")
+
         train_loss = train_fn(train_loader, model, optimizer, loss_fn)
         val_loss = validate(validation_loader, model, loss_fn)
+
         train_losses.append(train_loss)
         val_losses.append(val_loss)
+
+        # Save best model
+        if val_loss < best_val_loss:
+            best_val_loss = val_loss
+            torch.save(model.state_dict(), f"best_model_epoch{epoch + 1}.pt")
+
+            if best_model_path is not None and os.path.exists(best_model_path):
+                os.remove(best_model_path)
+            best_model_path = f"best_model_epoch{epoch + 1}.pt"
+
+            print(f"New best model saved at epoch {epoch + 1} with val_loss = {val_loss:.4f}")
 
     plt.figure(figsize=(10, 5))
     plt.plot(train_losses, label='Train Loss')
