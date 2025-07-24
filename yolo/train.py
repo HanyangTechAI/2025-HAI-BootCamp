@@ -141,17 +141,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    
-    
-import matplotlib.pyplot as plt
-
-# 모든 에포크 종료 후...
-plt.figure(figsize=(8, 5))
-plt.plot(train_losses, label='Train Loss')
-plt.plot(val_losses, label='Validation Loss')
-plt.xlabel('Epoch')
-plt.ylabel('Loss')
-plt.title('Training and Validation Loss per Epoch')
-plt.legend()
-plt.grid(True)
-plt.show()
