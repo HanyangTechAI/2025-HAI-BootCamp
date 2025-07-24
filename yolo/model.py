@@ -88,11 +88,24 @@ class YOLO(nn.Module):
             nn.LeakyReLU(0.1, inplace=True),
             nn.Conv2d(512, 1024, 3, padding=1),
             nn.BatchNorm2d(1024),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(1024, 1024, 3, padding=1),
+            nn.BatchNorm2d(1024),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(1024, 1024, 3, stride=2, padding=1),
+            nn.BatchNorm2d(1024),
+            nn.LeakyReLU(0.1, inplace=True),
+
+            nn.Conv2d(1024, 1024, 3, padding=1),
+            nn.BatchNorm2d(1024),
+            nn.LeakyReLU(0.1, inplace=True),
+            nn.Conv2d(1024, 1024, 3, padding=1),
+            nn.BatchNorm2d(1024),
             nn.LeakyReLU(0.1, inplace=True)
         )
         return darknet 
 
-    def _make_fc_layers():
+    def _make_fc_layers(self):
         fc = nn.Sequential(
             nn.Flatten(),
             nn.Linear(S*S*1024, 4096),
