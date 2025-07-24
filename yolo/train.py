@@ -27,6 +27,9 @@ NUM_WORKERS = os.cpu_count() // 2
 print("NUM_WORKERS: ", NUM_WORKERS)
 PIN_MEMORY = True
 
+LOAD_MODEL = True
+MODEL = "data/best_model_epoch21.pt"
+
 IMG_DIR = "data/images"
 LABEL_DIR = "data/labels"
 TRAIN_CSV = "data/train_5000.csv"
@@ -85,6 +88,9 @@ def validate(loader, model, loss_fn):
 
 def main():
     model = YOLO().to(DEVICE)
+    if LOAD_MODEL:
+        model.load_state_dict(torch.load(MODEL, weights_only=True))
+
     loss_fn = Loss()
     optimizer = optim.Adam(
         model.parameters(), lr=LEARNING_RATE, weight_decay=WEIGHT_DECAY
