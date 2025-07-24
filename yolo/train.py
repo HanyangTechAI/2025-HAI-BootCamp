@@ -2,6 +2,7 @@ import torch
 import torch.optim as optim
 import torchvision.transforms as transforms
 import torchvision.transforms.functional as FT
+import matplotlib.pyplot as plt
 from torch.utils.data import DataLoader
 
 from tqdm import tqdm
@@ -131,6 +132,9 @@ def main():
         drop_last=True,
     )
 
+    train_loss_list = []
+    val_loss_list = []
+
     for epochs in range(EPOCHS):
         train_loss = train_fn(train_loader, model, optimizer, loss_fn)
         val_loss = validate(validation_loader, model, loss_fn)
@@ -138,6 +142,16 @@ def main():
         print(train_loss)
         print("========== Validation Loss ==========")
         print(val_loss)
+        
+    plt.figure(figsize=(10, 5))
+    plt.plot(range(1, EPOCHS + 1), train_loss_list, label='Train Loss')
+    plt.plot(range(1, EPOCHS + 1), val_loss_list, label='Validation Loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.title('Training & Validation Loss')
+    plt.legend()
+    plt.grid(True)
+    plt.show()    
 
 if __name__ == "__main__":
     main()
