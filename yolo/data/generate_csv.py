@@ -23,5 +23,8 @@ def generate_csv(image_dir, label_dir, output_file, num_examples):
             f.write(f"{name}.jpg,{name}.txt\n")
 
 if __name__ == "__main__":
-    generate_csv("images", "labels", "val_27.csv", 27)
+    train_num = 2000
+    val_num = int(2000 * 0.3)
+    generate_csv("images", "labels", f"train_{train_num}.csv", train_num)
+    generate_csv("images", "labels", f"val_{val_num}.csv", val_num)
 

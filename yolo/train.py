@@ -18,7 +18,7 @@ torch.manual_seed(seed)
 LEARNING_RATE = 2e-5
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 print("DEVICE: ", DEVICE)
-BATCH_SIZE = 8 # 64 in original paper
+BATCH_SIZE = 10 # 64 in original paper
 WEIGHT_DECAY = 0
 EPOCHS = 100
 
@@ -32,8 +32,8 @@ MODEL = "data/best_model_epoch21.pt"
 
 IMG_DIR = "data/images"
 LABEL_DIR = "data/labels"
-TRAIN_CSV = "data/train_5000.csv"
-VALIDATE_CSV = "data/val_1500.csv"
+TRAIN_CSV = "data/train_2000.csv"
+VALIDATE_CSV = "data/val_600.csv"
 
 class Compose(object):
     def __init__(self, transforms):
