@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+*.zip
+yolo/data/images
+yolo/data/labels
+
 # Distribution / packaging
 .Python
 build/
