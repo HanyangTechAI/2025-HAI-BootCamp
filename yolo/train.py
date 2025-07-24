@@ -137,7 +137,9 @@ def main():
 
     for epochs in range(EPOCHS):
         train_loss = train_fn(train_loader, model, optimizer, loss_fn)
+        train_loss_list.append(train_loss)
         val_loss = validate(validation_loader, model, loss_fn)
+        val_loss_list.append(val_loss)
         print("========== Train Loss ==========")
         print(train_loss)
         print("========== Validation Loss ==========")
