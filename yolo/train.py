@@ -18,6 +18,9 @@ from utils import (
     save_checkpoint,
     load_checkpoint,
 )
+
+import matplotlib.pyplot as plt  # 추가
+
 seed = 123
 torch.manual_seed(seed)
 
@@ -138,6 +141,16 @@ def main():
         print(train_loss)
         print("========== Validation Loss ==========")
         print(val_loss)
+        
+    # 결과 그래프 출력
+    plt.figure()
+    plt.plot(range(1, EPOCHS+1), train_losses, label='Train Loss')
+    plt.plot(range(1, EPOCHS+1), val_losses, label='Validation Loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss')
+    plt.title('Training & Validation Loss')
+    plt.legend()
+    plt.show()
 
 if __name__ == "__main__":
     main()
