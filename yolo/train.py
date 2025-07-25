@@ -20,7 +20,7 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 print("DEVICE: ", DEVICE)
 BATCH_SIZE = 10 # 64 in original paper
 WEIGHT_DECAY = 0
-EPOCHS = 100
+EPOCHS = 90
 
 import os
 NUM_WORKERS = os.cpu_count() // 2
