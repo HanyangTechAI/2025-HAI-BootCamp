@@ -10,6 +10,7 @@ from tqdm import tqdm
 from loss import Loss
 from model import YOLO
 from dataset import VOCDataset
+from utils import *
 
 seed = 123
 torch.manual_seed(seed)
@@ -136,6 +137,13 @@ def main():
     best_model_path = None
 
     for epoch in range(EPOCHS):
+        for x, y in train_loader:
+           x = x.to(DEVICE)
+           for idx in range(8):
+               bboxes = cellboxes_to_boxes(model(x))
+               bboxes = non_max_suppression(bboxes[idx], iou_threshold=0.5, threshold=0.4, box_format="midpoint")
+               plot_image(x[idx].permute(1,2,0).to("cpu"), bboxes)
+
         print(f"========== Epoch {epoch + 1}/{EPOCHS} ==========")
 
         train_loss = train_fn(train_loader, model, optimizer, loss_fn)
