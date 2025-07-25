@@ -16,11 +16,12 @@ torch.manual_seed(seed)
 
 # Hyperparameters etc.
 LEARNING_RATE = 2e-5
+WEIGHT_DECAY = 1e-4
+BATCH_SIZE = 10 # 64 in original paper
+EPOCHS = 90
+
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 print("DEVICE: ", DEVICE)
-BATCH_SIZE = 10 # 64 in original paper
-WEIGHT_DECAY = 0
-EPOCHS = 90
 
 import os
 NUM_WORKERS = os.cpu_count() // 2
